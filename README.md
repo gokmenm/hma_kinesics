@@ -1,6 +1,6 @@
 # hma_kinesics - HEAD MOTION ANALYSIS USING KINESICS
 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
+![Block diagram of the code.]()
 
 This repository contains the code for generating kinemes and kineme histograms described in the ICMI 2024 paper titled "Detecting Autism from Head Movements using Kinesics'.
 The code reads head movements angles yaw, pitch, and roll and generates kinemes and kineme histograms.
