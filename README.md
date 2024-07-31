@@ -12,21 +12,23 @@ The code reads head movements angles yaw, pitch, and roll and generates kinemes 
 The codes in this repo are mostly developed by Muhittin Gokmen during his sabbatical leave from MEF University, Turkey, at the Center for Autism Research (CAR) of Children's Hospital of Philadelphia (CHOP), USA from September 2023 to September 2024.
 
 ### Licensing 
-
+MIT License
 
 ### Installation
 
 ```
-git clone 
-cd hma_language_model
+git clone https://github.com/gokmenm/hma_kinesics.git
+cd hma_kinesics
 python3.9 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 ```
 
 ### Usage Example
-
-### Citation
-If you use this approach or the code for your publication, please cite as 
-
+1. Prepare input file including head movements angles yaw, pitch and roll as in the example file, 'angles.csv'. The angles are given in radians and converted to degrees in the code.
+2. python3.9 hma_kinesics.py --angles_path --
 ### Outputs
+
+
+### Citing
+If you use this approach or the code for your publication, please cite as 
