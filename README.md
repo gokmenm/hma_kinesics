@@ -7,8 +7,21 @@ The code reads head movements angles yaw, pitch, and roll and generates kinemes 
 The code hma_kines.py detections produces the smallest units kines by finding the peaks and valleys at three components PYR as local extrema in both time and scale space using SIFT like scale space feature extaction method. 
 
 The code hma_letter_detection.py generates kinemes, letters or characters of head movement by classifiying kines of PYR into one of 26 classes. Each letter correspond to an elementary unit of head movement such as noding, shaking or tilting, as shown in the table below. In this table P, Y, and R denotes pitch, yaw and roll angles of head movements while P, V and N denote peak, valley and none kines detected in these components, respectively. Thus in this coding scheme, the letter 'i' correspond to a noding of first up and then down, while the leter 'u' corresponds to shaking right and the left. Another file called summary.csv contains the summary of the video file as a sequence of head movement characters. 
-																
-![image](https://github.com/user-attachments/assets/8dac8572-9a90-499c-afb9-f781d08d7baa)
+</picture>
+
+
+|No	|P  |Y 	 |R  | Code |        |No   |P  |Y   |R  | Code |        |No   |P  |Y   |R  | Code |
+|----:|---|--- |---|------|    ----    |----:|---|--- |---|------|-----|----:|---|--- |---|------| 
+|0	|P	|P	|P	|a|		|9	|V	|P	|P	|j|		|18	|N	|P	|P	|s|
+|1	|P	|P	|V	|b|		|10	|V	|P	|V	|k|		|19	|N	|P	|V	|t|
+|2	|P	|P	|N	|c |		|11	|V	|P	|N	|l|		|20	|N	|P	|N	|u|
+|3	|P	|V	|P	|d|		|12	|V	|V	|P	|m|		|21	|N	|V	|P	|v|
+|4	|P	|V	|V	|e|		|13	|V	|V	|V	|n|		|22	|N	|V	|V	|w|
+|5	|P	|V	|N	|f|		|14	|V	|V	|N	|o|		|23	|N	|V	|N	|x|
+|6	|P	|N	|P	|g|		|15	|V	|N	|P	|p|		|24	|N	|N	|P	|y|
+|7	|P	|N	|V	|h|		|16	|V	|N	|V	|q|		|25	|N	|N	|V	|z|
+|8	|P	|N	|N	|i|		|17	|V	|N	|N	|r|		|26	|N	|N	|N	|-|
+
 
 The code hma_kinemes_detection.py generates higher level of kinemes as group of kinemes such as up-down noding (i) followed by a down-up noding (r) as 'ir'. 
 
