@@ -18,7 +18,7 @@ The code hma_letter_histogram.py generates the histograms of kineme groups and a
 In this study, we introduce a method to succesfully extract  the basic head movement units such as noding, shaking or tilting from head movement angles by utilizing the Kinesics pioneered by Birdwhistell. Our approach first defines the smallest unit of head movement, called kine, based on the anatomical constraints of the neck and head. We then quantify the location, magnitude, and duration of kines within each angular component of head movement. Through defining possible combinations of identified kines, we define a higher-level construct, kineme, which corresponds to basic head motion units such as nodding and shaking. We validate the proposed framework by predicting autism spectrum disorder (ASD) diagnosis from video recordings of interacting partners. We show that the multi-scale property of the proposed framework provides a significant advantage, as collapsing behavior across temporal scales reduces performance consistently. Finally, we incorporate another fundamental behavioral modality, namely speech, and show that distinguishing between speaking- and listening-time head movements significantly improves ASD classification performance.
 
 ### Background and Development
-The codes in this repo are mostly developed by Muhittin Gokmen during his sabbatical leave from MEF University, Turkey, at the Center for Autism Research (CAR) of Children's Hospital of Philadelphia (CHOP), USA from September 2023 to September 2024.
+The work was carried out during Muhittin Gokmen's sabbatical leave from MEF University, Turkey, at the Center for Autism Research (CAR) of Children's Hospital of Philadelphia (CHOP), USA from September 2023 to September 2024.
 
 ### Installation
 
