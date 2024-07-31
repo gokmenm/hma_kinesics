@@ -11,16 +11,16 @@ The code hma_letter_detection.py generates kinemes, letters or characters of hea
 
 
 |No	|P  |Y 	 |R  | Code |        |No   |P  |Y   |R  | Code |        |No   |P  |Y   |R  | Code |
-|----:|---|--- |---|------|    ----    |----:|---|--- |---|------|-----|----:|---|--- |---|------| 
-|0	|P	|P	|P	|a|		|9	|V	|P	|P	|j|		|18	|N	|P	|P	|s|
-|1	|P	|P	|V	|b|		|10	|V	|P	|V	|k|		|19	|N	|P	|V	|t|
-|2	|P	|P	|N	|c |		|11	|V	|P	|N	|l|		|20	|N	|P	|N	|u|
-|3	|P	|V	|P	|d|		|12	|V	|V	|P	|m|		|21	|N	|V	|P	|v|
-|4	|P	|V	|V	|e|		|13	|V	|V	|V	|n|		|22	|N	|V	|V	|w|
-|5	|P	|V	|N	|f|		|14	|V	|V	|N	|o|		|23	|N	|V	|N	|x|
-|6	|P	|N	|P	|g|		|15	|V	|N	|P	|p|		|24	|N	|N	|P	|y|
-|7	|P	|N	|V	|h|		|16	|V	|N	|V	|q|		|25	|N	|N	|V	|z|
-|8	|P	|N	|N	|i|		|17	|V	|N	|N	|r|		|26	|N	|N	|N	|-|
+|----:|---|--- |---|------   |    ----    |----:|---|--- |---|-----------|-----|----:|---|--- |---|------| 
+|0	|P	|P	|P	|**a**|		|9	|V	|P	|P	|**j**|		|18	|N	|P	|P	|**s**|
+|1	|P	|P	|V	|**b**|		|10	|V	|P	|V	|**k**|		|19	|N	|P	|V	|**t**|
+|2	|P	|P	|N	|**c**|		|11	|V	|P	|N	|**l**|		|20	|N	|P	|N	|**u**|
+|3	|P	|V	|P	|**d**|		|12	|V	|V	|P	|**m**|		|21	|N	|V	|P	|**v**|
+|4	|P	|V	|V	|**e**|		|13	|V	|V	|V	|**n**|		|22	|N	|V	|V	|**w**|
+|5	|P	|V	|N	|**f**|		|14	|V	|V	|N	|**o**|		|23	|N	|V	|N	|**x**|
+|6	|P	|N	|P	|**g**|		|15	|V	|N	|P	|**p**|		|24	|N	|N	|P	|**y**|
+|7	|P	|N	|V	|**h**|		|16	|V	|N	|V	|**q**|		|25	|N	|N	|V	|**z**|
+|8	|P	|N	|N	|**i**|		|17	|V	|N	|N	|**r**|		|26	|N	|N	|N	|**-**|
 
 
 The code hma_kinemes_detection.py generates higher level of kinemes as group of kinemes such as up-down noding (i) followed by a down-up noding (r) as 'ir'. 
