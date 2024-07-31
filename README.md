@@ -51,13 +51,13 @@ The code generates a file called all_letters.csv including detected kinemes (let
 
 ### Citing
 If you use this approach or the code for your publication, please cite as 
+```
 @inproceedings{gokmen2024,
   title={Detecting Autism from Head Movements using Kinesics,
-  author={Muhittin Gokmen, Evangelos Sariyanidi, Lisa Yankowitz, Casey J. Zampella,
-Robert T. Schultz, and Birkan Tunç.
-  booktitle={In Proceedings of ACM International Conference
-on Multimodal Interaction (ICMI 2024)},
+  author={Muhittin Gokmen, Evangelos Sariyanidi, Lisa Yankowitz, Casey J. Zampella, Robert T. Schultz, and Birkan Tunç.
+  booktitle={In Proceedings of ACM International Conference on Multimodal Interaction (ICMI 2024)},
   pages={5 pages},
   year={2024},
   organization={ACM, New York, NY, USA}
 }
+```
