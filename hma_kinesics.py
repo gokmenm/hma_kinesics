@@ -9,14 +9,13 @@ import pandas as pd
 import sqlite3
 from contextlib import closing
 
-
 import numpy as np
 from hma_kines_detection import Kines     # import the Kines class from the hma_kines_detection.py file
 from hma_letter_detection import Letters      # import the Letters class from the hma_letter_detection.py file
 from hma_letter_histograms import LetterHistograms   # import the LetterHistograms class from the hma_letter_histograms.py file
 from hma_kinemes_detection import Kinemes_Class   # import the Kinemes class from the hma_kinemes_detection.py file
-from hma_augment_videos_with_kines import AugmentVideo
-from hma_extract_video_clips import  ExtractVideoClips as evc
+#from hma_augment_videos_with_kines import AugmentVideo
+#from hma_extract_video_clips import  ExtractVideoClips as evc
 
 #from hma_db_classes import db_classes
 
@@ -53,10 +52,10 @@ class PoseKinemeHistogram():
                      "save_histogram_plots": False,  # default= False, True to save plots of histograms
                      'save_kines_to_file': False,  # default=False, True to save letters to a file
                      'save_kines_plots_to_file': False,  # default=False, True to save letters to a file
-                     'save_letters_to_file': False,   # default=False, True to save letters to a file
-                     'save_summary_to_file': False,  # default=False, True to save letters to a file
+                     'save_letters_to_file': True,   # default=False, True to save letters to a file
+                     'save_summary_to_file': True,  # default=False, True to save letters to a file
                      'save_letters_to_db': False,      # default=False, True to save letters to a database
-                     'save_histograms_to_file': False,  # default=False, True to save histograms to a file
+                     'save_histograms_to_file': True,  # default=False, True to save histograms to a file
                      'save_augmented_videos_to_file': False,  # default=False, True to save letters to a file
                      'save_kineme_clips_to_file': False,  # default=False, True to save letters to a file
                      }
@@ -81,10 +80,10 @@ class PoseKinemeHistogram():
 
     def compute_(self, x, s):
 
-        # Convert x from YPR to PYR. Radyan to degree
-        x[:, [0, 1]] = x[:, [1, 0]]    
+        # Convert x from YPR to PYR. Convert angles in radian to degree
+        x[:, [0, 1]] = x[:, [1, 0]]
         x = np.rad2deg(x)
-        s = s.flatten()
+        #s = s.flatten()
 
         ######## Get Kines from the angles file ########
         self.video_length = len(x[:, 0].tolist())
@@ -132,7 +131,7 @@ def save_results(x, pk, angles_filename, kwargs):
     # Convert x from YPR to PYR. radyan to degree 
     x[:, [0, 1]] = x[:, [1, 0]]        
     x = np.rad2deg(x)
-    s = s.flatten()    
+
     
     #pk = PoseKinemeHistogram(**kwargs)
     if pk.opts["save_kines_to_file"]:
@@ -265,15 +264,14 @@ def save_results(x, pk, angles_filename, kwargs):
 
 def main():
     # Create an object of the Kines class
-    Data_in_Folder = "/home/gokmenm/hma_data/data_in/"
-    Data_out_Folder = "/home/gokmenm/hma_data/data_out/"
-    filename_base = "ML0010_participant"
-    conf_part_id = 0 if "participant" in filename_base else 1
+    Data_in_Folder = "./data_in/"
+    Data_out_Folder = "./data_out/"
+    filename_base = "sample1"
     parser = argparse.ArgumentParser(description="Video demo script.")
     parser.add_argument('--Data_in_Folder', type = str, default = f"{Data_in_Folder}", help = 'Path to root directory containing all data_in')
     parser.add_argument('--videoFolder', type=str, default=f"{Data_in_Folder}videos/", help='Path to video folder')
-    parser.add_argument('--anglesFolder', type=str, default=f"{Data_in_Folder}cass_angles/", help='Path to angles folder')
-    parser.add_argument('--speechFolder', type=str, default=f"{Data_in_Folder}cass_speeches/", help='Path to speech folder')
+    parser.add_argument('--anglesFolder', type=str, default=f"{Data_in_Folder}", help='Path to angles folder')
+    parser.add_argument('--speechFolder', type=str, default=f"{Data_in_Folder}", help='Path to speech folder')
     parser.add_argument('--keypoint_folder', type=str, default=f"{Data_out_Folder}keypoints/", help='Path to keypoint folder')
     parser.add_argument('--OutputFolder', type=str, default=f"{Data_out_Folder}augmented_videos/",help='Path to output folder')
     parser.add_argument('--keypoints_yaw_folder', type=str, default=f"{Data_out_Folder}keypoints/yaw/",help='Path to yaw keypoints folder')
@@ -297,54 +295,36 @@ def main():
     #save_kwargs_to_file(f"{Data_out_Folder}kwargs_hma.json", **kwargs)
     #kwargs = read_kwargs_from_file(f"{Data_out_Folder}kwargs_hma.json")
 
-    angles_filename = kwargs['anglesFolder'] +  kwargs['filename_base'] + ".poses"
+    angles_filename = kwargs['anglesFolder'] +  kwargs['filename_base'] + ".poses_rad"
     print("anglesfilename: ", angles_filename)
     speech_labels_file = f"{kwargs['speechFolder']}{kwargs['filename_base']}.speech_labels"
-    print("speaking_labels_file: ", speech_labels_file)
-    source_dir = '/offline_data/face/CAR/SocialCoordination/BFMmm-19830.cfg1.global4/'
-    angle_file_extention = '.poses'
-    speech_file_extention = '.speech_labels'
+    print("speech_labels_file: ", speech_labels_file)
+    df = pd.read_csv(angles_filename)
+    df = df.fillna(-1)
+    x = df[['yaw', 'pitch', 'roll']].to_numpy()    # angles are in degrees
 
-    # Read the info of files from the_44.csv
-    selected_files= "/home/gokmenm/hma_data/data_in/cass_samples/the_44.csv"
-    # study_id,age_fake,gender,intake_final_group,FPS
-    df = pd.read_csv(selected_files, sep=",")
-    for i in range(len(df['study_id'])):
-        filename_base = df['study_id'][i] + "_participant"
-        kwargs['filename_base'] = filename_base
-        angles_filename = f"{kwargs['anglesFolder']}{filename_base}.poses"
-        speech_labels_file = f"{kwargs['speechFolder']}{filename_base}.speech_labels"
-        #if df['study_id'][i] == filename_base.split('_')[0]:
-        class_label = df['intake_final_group'][i]
-        gender = df['gender'][i]
-        age = df['age_fake'][i]
-        fps = df['FPS'][i]
-        x, s = read_angles_and_speech(angles_filename, speech_labels_file)
-        pk = PoseKinemeHistogram(**kwargs)
-        pk.kwargs['filename_base'] = filename_base
-        pk.opts['conf_part_id'] = conf_part_id
-        pk.opts['fps'] = fps
-        histogram = pk.compute_(x, s)
-        save_results(x, pk, angles_filename, kwargs)
+    #write the angles to a csv file
+    #x = np.deg2rad(x)
+    #x = np.rad2deg(x)
+    #df["yaw"] = x[:, 0]
+    #df["pitch"] = x[:, 1]
+    #df["roll"] = x[:, 2]
+    #df.to_csv(f"{Data_out_Folder}{filename_base}.poses_degree", index=False)
 
-    #combine_summaries(nonseparated_summary_folder, speaker_summary_folder, listener_summary_folder)
 
-    print("done !")
+    #read speaker file if it exists, otherwise create a dummy speaking file
+    if os.path.exists(speech_labels_file):
+        ds = pd.read_csv(speech_labels_file)
+        ds = ds.fillna(-1)
+        s = ds['speaking'].to_numpy()
+    else:
+        s = np.ones(len(df['yaw']))
 
-def read_angles_and_speech(angles_filename, speech_labels_filename):
-    columns = [[] for _ in range(9)]
-    with open(angles_filename, "r") as f:
-        for line in f:
-            numbers = list(map(float, line.split()))
-            for i in range(9):
-                columns[i].append(numbers[i])
-    yaw = columns[6]
-    pitch = columns[7]
-    roll = columns[8]
-    x = np.column_stack((yaw, pitch, roll))
-    s = pd.read_csv(speech_labels_filename, sep=" ", header=None, names=['speaking'])
-    s = s['speaking'].fillna(-1)
-    return x, s
+    pk = PoseKinemeHistogram(**kwargs)
+    histogram = pk.compute_(x, s)
+    print("histogram: ", histogram)
+    save_results(x, pk, angles_filename, kwargs)
+    print("Done!")
 
 
 if __name__ == "__main__":
