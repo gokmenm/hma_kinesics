@@ -38,16 +38,25 @@ The work was carried out during Muhittin Gokmen's sabbatical leave from MEF Univ
 ```
 git clone https://github.com/gokmenm/hma_kinesics.git
 cd hma_kinesics
-python3.9 -m venv env
+python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 ```
 
 ### Usage Example
-1. Prepare input file including head movements angles yaw, pitch and roll as in the example file, 'angles.csv'. The angles are given in radians and converted to degrees in the code.
-2. python3.9 hma_kinesics.py --angles_path --
+1. Prepare input file including head movements angles yaw, pitch and roll as in the example file, "sample1.poses_rad". The angles should be given in radians, they are converted to degrees in the code. The speech_labels file, named "sample1.speech_labels", should have 1 if the person is speaking in a timeframe, o otherwise. You can use TalkNet to generate speech labels.
+2. After preparing sample1.poses_rad and sample1.speech_labels files, run hma_kinesics.py to generate output files: 
+```
+python3 hma_kinesics.py --filename_base sample1
+```
 ### Outputs
-The code generates a file called all_letters.csv including detected kinemes (letters of head movements denoted by characters a to z) and the histogram file hist.csv to use as a feature in classification tasks.
+The code generates the following output folders:    
+
+- letters  
+- letter_summaries
+- letter_histograms 
+
+If you do not have sample1.speech_labels file; the code generates a dummy file with all speaking labels marked as 1. In this case only nonseparated outputs should be used.
 
 ### Citing
 If you use this approach or the code for your publication, please cite as 
