@@ -61,12 +61,14 @@ If you do not have sample1.speech_labels file; the code generates a dummy file w
 ### Citing
 If you use this approach or the code for your publication, please cite as 
 ```
-@inproceedings{gokmen2024,
-  title={Detecting Autism from Head Movements using Kinesics,
-  author={Muhittin Gokmen, Evangelos Sariyanidi, Lisa Yankowitz, Casey J. Zampella, Robert T. Schultz, and Birkan Tunç.
-  booktitle={In Proceedings of ACM International Conference on Multimodal Interaction (ICMI 2024)},
-  pages={5 pages},
-  year={2024},
-  organization={ACM, New York, NY, USA}
+@inproceedings{Gokmen2024,
+   author = {Muhittin Gokmen and Evangelos Sariyanidi and Lisa Yankowitz and Casey J Zampella and Robert T Schultz and Birkan Tunç},
+   doi = {10.1145/3678957.3685711},
+   isbn = {9798400704628},
+   booktitle = {Proc. of the 26th ACM International Conference on Multimodal Interaction (ICMI'2024)},
+   keywords = {Autism,Computer Vision,Head Movements,Kinesics,Psychology},
+   title = {Detecting Autism from Head Movements using Kinesics},
+   url = {https://doi.org/10.1145/3678957.3685711},
+   year = {2024},
 }
 ```
