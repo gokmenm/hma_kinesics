@@ -16,7 +16,6 @@ from hma_letter_histograms import LetterHistograms   # import the LetterHistogra
 from hma_kinemes_detection import Kinemes_Class   # import the Kinemes class from the hma_kinemes_detection.py file
 #from hma_augment_videos_with_kines import AugmentVideo
 #from hma_extract_video_clips import  ExtractVideoClips as evc
-
 #from hma_db_classes import db_classes
 
 class PoseKinemeHistogram():
@@ -83,8 +82,6 @@ class PoseKinemeHistogram():
         # Convert x from YPR to PYR. Convert angles in radian to degree
         x[:, [0, 1]] = x[:, [1, 0]]
         x = np.rad2deg(x)
-        #s = s.flatten()
-
         ######## Get Kines from the angles file ########
         self.video_length = len(x[:, 0].tolist())
         #print("video_length: compute", self.video_length)
@@ -93,12 +90,9 @@ class PoseKinemeHistogram():
         self.kines_pitch, self.kines_yaw, self.kines_roll = self.kines.get_kines(x)
 
         ###        Get letters from the kines      ####
-
         self.letterObj = Letters(self.letter_opts)
         self.all_letters = self.letterObj.get_letters(self.kines_yaw, self.kines_pitch, self.kines_roll, x)
-        #print('header of all_letters : ', self.all_letters.keys())
         # separate the letters into speaker and listener letters, update the all_letters['speaking'] column
-
         self.all_letters, self.speaker_letters, self.listener_letters  = self.letterObj.get_speaker_listener_letters(self.all_letters, s)
 
         ####        Get histograms from letters (kineme_type = 'single_letters') and kinemes      ####
@@ -113,27 +107,13 @@ class PoseKinemeHistogram():
         self.kineme_histogram_listener = self.hist_kineme.generate_histograms(self.detected_kinemes_listener)
         self.histogram = self.hist_kineme.select_histogram(self.kineme_histogram_nonseparated, self.kineme_histogram_speaker, self.kineme_histogram_listener)
 
-        #print("len(histogram): ", len(self.histogram))
-        #print("histogram: ", self.histogram)
         return self.histogram
-
-def save_kwargs_to_file(file_path, **kwargs):
-    with open(file_path, 'w') as file:
-        json.dump(kwargs, file)
-def read_kwargs_from_file(file_path):
-    with open(file_path, 'r') as file:
-        kwargs = json.load(file)
-    return kwargs
 
 def save_results(x, pk, angles_filename, kwargs):
     # Saving intermediate results to files
-    
     # Convert x from YPR to PYR. radyan to degree 
     x[:, [0, 1]] = x[:, [1, 0]]        
     x = np.rad2deg(x)
-
-    
-    #pk = PoseKinemeHistogram(**kwargs)
     if pk.opts["save_kines_to_file"]:
         kine_obj= Kines(pk.kines_opts)
         if not os.path.exists(kwargs['keypoints_yaw_folder']):
@@ -291,9 +271,6 @@ def main():
     parser.add_argument('--filename_base', type=str, default=f"{filename_base}", help='Filename base')
     args = parser.parse_args()
     kwargs = vars(args)
-    #print("kwargs: ", kwargs)
-    #save_kwargs_to_file(f"{Data_out_Folder}kwargs_hma.json", **kwargs)
-    #kwargs = read_kwargs_from_file(f"{Data_out_Folder}kwargs_hma.json")
 
     angles_filename = kwargs['anglesFolder'] +  kwargs['filename_base'] + ".poses_rad"
     print("anglesfilename: ", angles_filename)
@@ -302,16 +279,6 @@ def main():
     df = pd.read_csv(angles_filename)
     df = df.fillna(-1)
     x = df[['yaw', 'pitch', 'roll']].to_numpy()    # angles are in degrees
-
-    #write the angles to a csv file
-    #x = np.deg2rad(x)
-    #x = np.rad2deg(x)
-    #df["yaw"] = x[:, 0]
-    #df["pitch"] = x[:, 1]
-    #df["roll"] = x[:, 2]
-    #df.to_csv(f"{Data_out_Folder}{filename_base}.poses_degree", index=False)
-
-
     #read speaker file if it exists, otherwise create a dummy speaking file
     if os.path.exists(speech_labels_file):
         ds = pd.read_csv(speech_labels_file)
@@ -322,7 +289,7 @@ def main():
 
     pk = PoseKinemeHistogram(**kwargs)
     histogram = pk.compute_(x, s)
-    print("histogram: ", histogram)
+    #print("histogram: ", histogram)
     save_results(x, pk, angles_filename, kwargs)
     print("Done!")
 
