@@ -44,7 +44,7 @@ pip install -r requirements.txt
 ```
 
 ### Usage Example
-1. Prepare input file including head movements angles yaw, pitch and roll as in the example file, "sample1.poses_rad". The angles should be given in radians, they are converted to degrees in the code. The speech_labels file, named "sample1.speech_labels", should have 1 if the person is speaking in a timeframe, 0 otherwise. You can use [TalkNet ASD](https://github.com/TaoRuijie) generate speech labels.
+1. Prepare input file including head movements angles yaw, pitch and roll as in the example file, "sample1.poses_rad". The angles should be given in radians, they are converted to degrees in the code. The speech_labels file, named "sample1.speech_labels", should have 1 if the person is speaking in a timeframe, 0 otherwise. You can use [TalkNet ASD](https://github.com/TaoRuijie/TalkNet-ASD) generate speech labels.
 2. After preparing sample1.poses_rad and sample1.speech_labels files, run hma_kinesics.py to generate output files: 
 ```
 python3 hma_kinesics.py --filename_base sample1
