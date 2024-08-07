@@ -62,7 +62,7 @@ If you do not have sample1.speech_labels file; the code generates a dummy file w
 If you use this approach or the code for your publication, please cite as 
 ```
 @inproceedings{Gokmen2024,
-   author = {Muhittin Gokmen and Evangelos Sariyanidi and Lisa Yankowitz and Casey J Zampella and Robert T Schultz and Birkan Tunç},
+   author = {Muhittin Gokmen and Evangelos Sariyanidi and Lisa Yankowitz and Casey J Zampella and Robert T. Schultz and Birkan Tunç},
    doi = {10.1145/3678957.3685711},
    isbn = {9798400704628},
    booktitle = {Proc. of the 26th ACM International Conference on Multimodal Interaction (ICMI'2024)},
